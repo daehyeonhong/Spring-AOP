@@ -124,4 +124,103 @@ class ExecutionTests {
         //then
         assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
     }
+
+    @Test
+    @DisplayName(value = "typeExactMatch")
+    public void typeExactMatch() {
+        //given
+        //when
+        pointcut.setExpression("execution(* hello.aop.order.aop.member.MemberServiceImpl.hello(..))");
+        //then
+        assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
+    }
+
+    @Test
+    @DisplayName(value = "typeMatchSuperType")
+    public void typeMatchSuperType() {
+        //given
+        //when
+        pointcut.setExpression("execution(* hello.aop.order.aop.member.MemberService.*(..))");
+        //then
+        assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
+    }
+
+    @Test
+    @DisplayName(value = "typeMatchInternal")
+    public void typeMatchInternal() throws NoSuchMethodException {
+        //given
+        pointcut.setExpression("execution(* hello.aop.order.aop.member.MemberService.*(..))");
+        //when
+        final Method internalMethod = MemberServiceImpl.class.getMethod("internal", String.class);
+        //then
+        assertThat(pointcut.matches(internalMethod, MemberServiceImpl.class)).isFalse();
+    }
+
+    @Test
+    @DisplayName(value = "typeMatchNoSuperTypeMethodFalse")
+    public void typeMatchNoSuperTypeMethodFalse() throws NoSuchMethodException {
+        //given
+        pointcut.setExpression("execution(* hello.aop.order.aop.member.MemberServiceImpl.*(..))");
+        //when
+        final Method internalMethod = MemberServiceImpl.class.getMethod("internal", String.class);
+        //then
+        assertThat(pointcut.matches(internalMethod, MemberServiceImpl.class)).isTrue();
+    }
+
+    @Test
+    @DisplayName(value = "argsMatch")
+    public void argsMatch() {
+        //given
+        pointcut.setExpression("execution(* *(String))");
+        //when
+        assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
+        //then
+    }
+    @Test
+    @DisplayName(value = "argsMatch")
+    public void argsMatchWithoutArgs() {
+        //given
+        pointcut.setExpression("execution(* *())");
+        //when
+        assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isFalse();
+        //then
+    }
+
+    /**
+     * 모든 타입의 파라미터 한개
+     */
+    @Test
+    @DisplayName(value = "argsMatchStar")
+    public void argsMatchStar() {
+        //given
+        //when
+        pointcut.setExpression("execution(* *(*))");
+        //then
+        assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
+    }
+    /**
+     * 개수와 무관하게 모든 파라미터, 모든 타입 허용
+     * (String), (String, Object), (String, Object, int)
+     */
+     @Test
+     @DisplayName(value = "argsMatchAll")
+     public void argsMatchAll () {
+         //given
+         //when
+         pointcut.setExpression("execution(* *(..))");
+         //then
+         assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
+    }  /**
+     * String Type으로 시작, 숫자와 무관하게 모든 파라미터, 모든 타입 허용
+     * (String), (String, Object), (String, Object, int)
+     */
+     @Test
+     @DisplayName(value = "argsMatchComplex")
+     public void argsMatchComplex () {
+         //given
+         //when
+         pointcut.setExpression("execution(* *(String, ..))");
+         //then
+         assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
+    }
 }
