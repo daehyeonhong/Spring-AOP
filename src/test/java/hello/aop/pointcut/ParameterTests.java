@@ -1,8 +1,8 @@
 package hello.aop.pointcut;
 
-import hello.aop.order.aop.member.MemberService;
-import hello.aop.order.aop.member.annotation.ClassAop;
-import hello.aop.order.aop.member.annotation.MethodAop;
+import hello.aop.order.member.MemberService;
+import hello.aop.order.member.annotation.ClassAop;
+import hello.aop.order.member.annotation.MethodAop;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -33,7 +33,7 @@ public class ParameterTests {
     @Slf4j
     @Aspect
     static class ParameterAspect {
-        @Pointcut(value = "execution(* hello.aop.order.aop.member..*.*(..))")
+        @Pointcut(value = "execution(* hello.aop.order.member..*.*(..))")
         private void allMember() {
         }
 

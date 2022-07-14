@@ -1,6 +1,6 @@
 package hello.aop.pointcut;
 
-import hello.aop.order.aop.member.MemberService;
+import hello.aop.order.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -33,22 +33,22 @@ class ThisTargetTests {
     @Slf4j
     @Aspect
     static class ThisTargetAspect {
-        @Before(value = "this(hello.aop.order.aop.member.MemberService)")
+        @Before(value = "this(hello.aop.order.member.MemberService)")
         public void doThisInterface(final JoinPoint joinPoint) {
             log.info("[This-interface] {}", joinPoint.getSignature());
         }
 
-        @Before(value = "target(hello.aop.order.aop.member.MemberService)")
+        @Before(value = "target(hello.aop.order.member.MemberService)")
         public void doTargetInterface(final JoinPoint joinPoint) {
             log.info("[Target-interface] {}", joinPoint.getSignature());
         }
 
-        @Before(value = "this(hello.aop.order.aop.member.MemberServiceImpl)")
+        @Before(value = "this(hello.aop.order.member.MemberServiceImpl)")
         public void doThis(final JoinPoint joinPoint) {
             log.info("[This] {}", joinPoint.getSignature());
         }
 
-        @Before(value = "target(hello.aop.order.aop.member.MemberServiceImpl)")
+        @Before(value = "target(hello.aop.order.member.MemberServiceImpl)")
         public void doTarget(final JoinPoint joinPoint) {
             log.info("[Target] {}", joinPoint.getSignature());
         }

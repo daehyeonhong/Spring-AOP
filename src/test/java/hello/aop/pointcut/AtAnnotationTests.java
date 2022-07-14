@@ -1,6 +1,6 @@
 package hello.aop.pointcut;
 
-import hello.aop.order.aop.member.MemberService;
+import hello.aop.order.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -29,7 +29,7 @@ class AtAnnotationTests {
     @Slf4j
     @Aspect
     static class AtAnnotationAspect {
-        @Around("@annotation(hello.aop.order.aop.member.annotation.MethodAop)")
+        @Around("@annotation(hello.aop.order.member.annotation.MethodAop)")
         public Object doAtAnnotation(final ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
             log.info("[@Annotation] {}", proceedingJoinPoint.getSignature());
             return proceedingJoinPoint.proceed();

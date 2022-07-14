@@ -1,6 +1,6 @@
 package hello.aop.pointcut;
 
-import hello.aop.order.aop.member.MemberServiceImpl;
+import hello.aop.order.member.MemberServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +21,7 @@ class WithinTests {
 
     @Test
     void printMethod() {
-        //java.lang.String hello.aop.order.aop.member.MemberServiceImpl.hello(java.lang.String)
+        //java.lang.String hello.aop.order.member.MemberServiceImpl.hello(java.lang.String)
         log.info("helloMethod={}", helloMethod);
     }
 
@@ -30,7 +30,7 @@ class WithinTests {
     void withinExact() {
         //given
         //when
-        pointcut.setExpression("within(hello.aop.order.aop.member.MemberServiceImpl)");
+        pointcut.setExpression("within(hello.aop.order.member.MemberServiceImpl)");
         //then
         assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
     }
@@ -40,7 +40,7 @@ class WithinTests {
     void withinStar() {
         //given
         //when
-        pointcut.setExpression("within(hello.aop.order.aop.member.*Service*)");
+        pointcut.setExpression("within(hello.aop.order.member.*Service*)");
 
         //then
         assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
@@ -62,7 +62,7 @@ class WithinTests {
     void withinSuperTypeFalse() {
         //given
         //when
-        pointcut.setExpression("within(hello.aop.order.aop.member.MemberService)");
+        pointcut.setExpression("within(hello.aop.order.member.MemberService)");
 
         //then
         assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isFalse();
@@ -73,7 +73,7 @@ class WithinTests {
     void executionSuperTypeTrue() {
         //given
         //when
-        pointcut.setExpression("execution(* hello.aop.order.aop.member.MemberService.*(..))");
+        pointcut.setExpression("execution(* hello.aop.order.member.MemberService.*(..))");
 
         //then
         assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();

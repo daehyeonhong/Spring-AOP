@@ -1,6 +1,6 @@
 package hello.aop.pointcut;
 
-import hello.aop.order.aop.member.annotation.ClassAop;
+import hello.aop.order.member.annotation.ClassAop;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -58,14 +58,14 @@ class AtTargetAtWithinTests {
     @Slf4j
     @Aspect
     static class AtTargetAtWithinAspect {
-        @Around(value = "execution(* hello.aop..*(..))&&@target(hello.aop.order.aop.member.annotation.ClassAop)")
+        @Around(value = "execution(* hello.aop..*(..))&&@target(hello.aop.order.member.annotation.ClassAop)")
         public Object atTarget(final ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
             log.info("[@Target] {}", proceedingJoinPoint.getSignature());
             return proceedingJoinPoint.proceed();
 
         }
 
-        @Around(value = "execution(* hello.aop..*(..))&&@within(hello.aop.order.aop.member.annotation.ClassAop)")
+        @Around(value = "execution(* hello.aop..*(..))&&@within(hello.aop.order.member.annotation.ClassAop)")
         public Object atWithin(final ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
             log.info("[@Within] {}", proceedingJoinPoint.getSignature());
             return proceedingJoinPoint.proceed();
