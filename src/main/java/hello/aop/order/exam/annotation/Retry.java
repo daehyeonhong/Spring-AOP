@@ -7,5 +7,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target(value = {METHOD})
 @Retention(value = RUNTIME)
-public @interface Trace {
+public @interface Retry {
+    int value() default 3;
 }
