@@ -1,11 +1,7 @@
 package hello.aop;
 
-import hello.aop.order.exam.annotation.Retry;
-import hello.aop.order.exam.aop.RetryAspect;
-import hello.aop.order.exam.aop.TraceAspect;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
 //@Import(value = {AspectV1.class})

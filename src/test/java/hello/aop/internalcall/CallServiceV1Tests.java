@@ -9,21 +9,21 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 
 @Slf4j
-@SpringBootTest
+@SpringBootTest(properties = {"spring.main.allow-circular-references=true"})
 @Import(value = {CallLogAspect.class})
-class CallServiceV0Tests {
+class CallServiceV1Tests {
     @Autowired
-    private CallServiceV0 callServiceV0;
+    private CallServiceV1 callServiceV1;
 
     @Test
     @DisplayName(value = "internal")
     void internal() {
-        this.callServiceV0.internal();
+        this.callServiceV1.internal();
     }
 
     @Test
     @DisplayName(value = "external")
     void external() {
-        this.callServiceV0.external();
+        this.callServiceV1.external();
     }
 }
